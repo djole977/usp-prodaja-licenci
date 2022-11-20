@@ -10,5 +10,10 @@ namespace ProdajaLicenci.Data
             : base(options)
         {
         }
+        public DbSet<License> Licenses { get; set; }
+        public DbSet<LicenseCategory> LicenseCategories { get; set; }
+        public DbSet<LicenseSubcategory> LicenseSubcategories { get; set; }
+        public DbSet<LicensePurchase> LicensePurchases { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
     }
 }
