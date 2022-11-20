@@ -7,7 +7,9 @@ namespace ProdajaLicenci.ViewModels
         public ManageAccountsVM()
         {
             Users = new List<ApplicationUserDto>();
+            Roles = new List<string>();
         }
         public List<ApplicationUserDto> Users { get; set; }
+        public List<string> Roles { get; set; }
     }
 }
