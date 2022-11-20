@@ -26,6 +26,28 @@
                 </td>
             </tr>
         </thead>
+        <tbody>
+            @foreach(var license in Model.Licenses)
+            {
+                <tr>
+                    <td>
+                        @license.Key
+                    </td>
+                    <td>
+                        @license.Vendor.Name
+                    </td>
+                    <td>
+                        @license.ValidFrom.ToString()
+                    </td>
+                    <td>
+                        @license.ValidTo.ToString()
+                    </td>
+                    <td>
+                        @license.BoughtBy?.Email
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 

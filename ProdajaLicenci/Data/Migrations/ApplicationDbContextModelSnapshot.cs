@@ -276,7 +276,7 @@ namespace ProdajaLicenci.Data.Migrations
 
                     b.HasIndex("VendorId");
 
-                    b.ToTable("Licenses");
+                    b.ToTable("Licenses", (string)null);
                 });
 
             modelBuilder.Entity("ProdajaLicenci.Models.LicenseCategory", b =>
@@ -296,7 +296,7 @@ namespace ProdajaLicenci.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LicenseCategories");
+                    b.ToTable("LicenseCategories", (string)null);
                 });
 
             modelBuilder.Entity("ProdajaLicenci.Models.LicensePurchase", b =>
@@ -322,7 +322,7 @@ namespace ProdajaLicenci.Data.Migrations
 
                     b.HasIndex("LicenseId");
 
-                    b.ToTable("LicensePurchases");
+                    b.ToTable("LicensePurchases", (string)null);
                 });
 
             modelBuilder.Entity("ProdajaLicenci.Models.LicenseSubcategory", b =>
@@ -347,7 +347,7 @@ namespace ProdajaLicenci.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("LicenseSubcategories");
+                    b.ToTable("LicenseSubcategories", (string)null);
                 });
 
             modelBuilder.Entity("ProdajaLicenci.Models.Vendor", b =>
@@ -367,7 +367,7 @@ namespace ProdajaLicenci.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vendors");
+                    b.ToTable("Vendors", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

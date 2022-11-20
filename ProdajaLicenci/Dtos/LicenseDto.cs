@@ -12,8 +12,8 @@
         public float Price { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
-        public ApplicationUserDto AddedBy { get; set; }
+        public ApplicationUserDto? AddedBy { get; set; }
         public string Description { get; set; }
-
+        public ApplicationUserDto? BoughtBy { get; set; }
     }
 }
