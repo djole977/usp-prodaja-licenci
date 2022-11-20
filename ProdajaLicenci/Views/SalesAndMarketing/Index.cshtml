@@ -1,0 +1,107 @@
+﻿@model ProdajaLicenci.ViewModels.LicensesVM
+
+<div class="col-12">
+    <div class="col-12 d-flex justify-content-between">
+        <h2>Manage Licenses</h2>
+        <button class="btn btn-primary rounded-pill" onclick="NewLicenseModal()">+ Add License</button>
+    </div>
+    <hr />
+    <table id="LicensesTable" class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>
+                    Key
+                </td>
+                <td>
+                    Vendor
+                </td>
+                <td>
+                    Valid From
+                </td>
+                <td>
+                    Valid Until
+                </td>
+                <td>
+                    Bought By
+                </td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div id="NewLicenseModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add License</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="col-12 d-flex justify-content-center">
+              <div class="col-6">
+                  <div class="col-12 mb-4">
+                        <h4>Key:</h4>
+                        <input id="newLicenseKey" type="text" class="form-control col-6" required placeholder="XXXX-XXXX-XXXX" />
+                  </div>
+                  <div class="col-12 mb-4">
+                        <h4>Valid From:</h4>
+                        <input id="newLicenseDateFrom" type="text" class="form-control col-6" required/>
+                  </div>
+                  <div class="col-12 mb-4">
+                        <h4>Valid Until:</h4>
+                        <input id="newLicenseDateTo" type="text" class="form-control col-6" required/>
+                  </div>
+                  <div class="col-12 mb-4">
+                        <h4>Vendor:</h4>
+                        <select id="newLicenseVendor" class="form-control col-6" required>
+                            @foreach(var vendor in Model.Vendors)
+                            {
+                                <option value="@vendor.Id">@vendor.Name</option>
+                            }
+                        </select>
+                  </div>
+                  <div class="col-12 mb-4">
+                        <h4>Category:</h4>
+                        <select id="newLicenseCategory" class="form-control col-6" required>
+                            @foreach(var category in Model.LicenseCategories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </select>
+                  </div>
+                  @*<div class="col-12 mb-4">
+                        <h4>Subcategory:</h4>
+                        <select id="newLicenseVendor" class="form-control col-6" required>
+                            @foreach(var subcategory in Model.LicenseSubcategories)
+                            {
+                                <option value="@subcategory.Id">@subcategory.Name</option>
+                            }
+                        </select>
+                  </div>*@
+                  <div class="col-12 mb-4">
+                        <h4>Price:</h4>
+                        <input id="newLicensePrice" type="number" class="form-control col-6" required/>
+                  </div>
+                  <div class="col-12 mb-4">
+                        <h4>Description:</h4>
+                        <input id="newLicenseDescription" type="text" class="form-control col-6" required/>
+                  </div>
+              </div>
+              @*<div class="col-6 mb-4">
+                    <h4>Valid From:</h4>
+                    <input id="newLicenseDateFrom" type="date" class="form-control col-6" required/>
+              </div>*@
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="AddNewLicense()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input id="addLicenseUrl" type="hidden" value="@Url.Action("AddNewLicense", "SalesAndMarketing")" />
+
+@section Scripts{
+    <script src="~/js/SalesAndMarketing.js"></script>
+}

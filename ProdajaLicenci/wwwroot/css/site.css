@@ -15,4 +15,19 @@ html {
 
 body {
   margin-bottom: 60px;
+  height: 100%;
+}
+.bg-dark {
+    background-color: #212529 !important;
+}
+.hover-grey:hover {
+    background-color: #404040;
+}
+#wrapper {
+    min-height: 100%;
+    margin-bottom: -75px;
+}
+
+#seperator, #footer {
+    height: 75px;
 }

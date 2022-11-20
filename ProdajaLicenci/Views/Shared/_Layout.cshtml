@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/ProdajaLicenci.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/daterangepicker/daterangepicker.css"/>
     <link rel="stylesheet" href="~/lib/datatables/datatables.css"/>
+    <link rel="stylesheet" href="~/lib/jquery-confirm/jquery-confirm.min.css"/>
 </head>
 <body>
     <header>
@@ -25,6 +26,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SalesAndMarketing" asp-action="Index">Manage Licenses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ManageAccounts">Users</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
@@ -33,7 +40,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container shadow p-5" style="margin-bottom: 650px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -48,9 +55,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-confirm/jquery-confirm.min.js"></script>
-    <script src="~/lib/daterangepicker/daterangepicker.js"></script>
     <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/daterangepicker/daterangepicker.js"></script>
     <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/lib/blockui/blockUI.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
