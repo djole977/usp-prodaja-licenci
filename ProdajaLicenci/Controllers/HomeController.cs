@@ -58,14 +58,5 @@ namespace ProdajaLicenci.Controllers
 
             return Json(new { success = true });
         }
-        [Authorize]
-        public async Task<IActionResult> MyLicenses()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            LicensesVM model = new LicensesVM();
-            model.Licenses = await _licenseService.GetUserLicenses(user.Id);
-
-            return View(model);
-        }
     }
 }

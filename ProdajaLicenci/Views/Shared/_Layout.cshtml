@@ -40,9 +40,12 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item mr-4">
-                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><h3 style="color: #36a847">My Balance: $@user?.Balance</h3></a>
+                        <a data-widget="pushmenu" href="#" role="button"><h3 style="color: #36a847">My Balance: $@user?.Balance</h3></a>
                     </li>
                 }
+                <li class="nav-item ml-4">
+                    <h4>@user?.Email</h4>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" id="fullscreen" href="#" role="button">
                         <i id="fullscreen1" class="fas fa-expand-arrows-alt"></i>
@@ -73,6 +76,14 @@
                     <ul id="nav-sidebar" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                                <a id="nav-link-14" asp-controller="Home" asp-action="Licenses" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon fas fa-store"></i>
+                                    <p>
+                                        Store
+                                    </p>
+                                </a>
+                            </li>
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -117,15 +128,7 @@
                                 </li>
                             }
                             <li class="nav-item">
-                                <a id="nav-link-14" asp-controller="Home" asp-action="Licenses" class="nav-link" onclick="addActive(this)">
-                                    <i class="nav-icon fas fa-store"></i>
-                                    <p>
-                                        Store
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="nav-link-14" asp-controller="Home" asp-action="MyLicenses" class="nav-link" onclick="addActive(this)">
+                                <a id="nav-link-14" asp-controller="User" asp-action="MyLicenses" class="nav-link" onclick="addActive(this)">
                                     <i class="nav-icon fas fa-key"></i>
                                     <p>
                                         My Licenses
@@ -178,6 +181,7 @@
     <script src="~/lib/datatables/datatables.min.js"></script>
     <script src="~/lib/blockui/blockUI.js"></script>
     <script src="~/lib/sidebar/dist/js/adminlte.min.js"></script>
+    <script src="~/lib/moment/moment.min.js"></script>
     <script src="https://kit.fontawesome.com/9c82e85201.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

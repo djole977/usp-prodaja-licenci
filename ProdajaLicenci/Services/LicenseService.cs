@@ -77,9 +77,18 @@ namespace ProdajaLicenci.Services
         }
         public async Task<List<LicenseDto>> GetUserLicenses(string userId)
         {
-            var licenses = await _db.LicensePurchases.Where(lp => lp.Buyer.Id == userId).Select(lp => lp.License).ToListAsync();
+            var licenses = await _db.LicensePurchases.Where(lp => lp.Buyer.Id == userId).Include(lp => lp.License).ThenInclude(license => license.Vendor).Select(lp => lp.License).ToListAsync();
             
             return _mapper.Map<List<LicenseDto>>(licenses);
+        }
+        public async Task<LicenseDto> GetLicenseKey(string userId, int licenseId)
+        {
+            var license = await _db.LicensePurchases.Where(lp => lp.Buyer.Id == userId && lp.LicenseId == licenseId).Include(lp => lp.License).ThenInclude(license => license.Vendor).Select(lp => lp.License).FirstOrDefaultAsync();
+            if(license == null)
+            {
+                throw new Exception("License not found!");
+            }
+            return _mapper.Map<LicenseDto>(license);
         }
     }
 }

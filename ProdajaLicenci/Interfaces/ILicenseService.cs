@@ -11,5 +11,6 @@ namespace ProdajaLicenci.Interfaces
         public Task<List<LicenseDto>> GetNotPurchasedLicenses();
         public Task PurchaseLicense(int licenseId, ApplicationUserDto user);
         public Task<List<LicenseDto>> GetUserLicenses(string userId);
+        public Task<LicenseDto> GetLicenseKey(string userId, int licenseId);
     }
 }

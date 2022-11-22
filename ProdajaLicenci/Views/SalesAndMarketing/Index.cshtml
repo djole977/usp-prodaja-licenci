@@ -63,19 +63,19 @@
               <div class="col-6">
                   <div class="col-12 mb-4">
                         <h4>Key:</h4>
-                        <input id="newLicenseKey" type="text" class="form-control col-6" required placeholder="XXXX-XXXX-XXXX" />
+                        <input id="newLicenseKey" type="text" class="form-control col-12" required placeholder="XXXX-XXXX-XXXX" />
                   </div>
                   <div class="col-12 mb-4">
                         <h4>Valid From:</h4>
-                        <input id="newLicenseDateFrom" type="text" class="form-control col-6" required/>
+                        <input id="newLicenseDateFrom" type="text" class="form-control col-12" required/>
                   </div>
                   <div class="col-12 mb-4">
                         <h4>Valid Until:</h4>
-                        <input id="newLicenseDateTo" type="text" class="form-control col-6" required/>
+                        <input id="newLicenseDateTo" type="text" class="form-control col-12" required/>
                   </div>
                   <div class="col-12 mb-4">
                         <h4>Vendor:</h4>
-                        <select id="newLicenseVendor" class="form-control col-6" required>
+                        <select id="newLicenseVendor" class="form-control col-12" required>
                             @foreach(var vendor in Model.Vendors)
                             {
                                 <option value="@vendor.Id">@vendor.Name</option>
@@ -84,7 +84,7 @@
                   </div>
                   <div class="col-12 mb-4">
                         <h4>Category:</h4>
-                        <select id="newLicenseCategory" class="form-control col-6" required>
+                        <select id="newLicenseCategory" class="form-control col-12" required>
                             @foreach(var category in Model.LicenseCategories)
                             {
                                 <option value="@category.Id">@category.Name</option>
@@ -102,11 +102,11 @@
                   </div>*@
                   <div class="col-12 mb-4">
                         <h4>Price:</h4>
-                        <input id="newLicensePrice" type="number" class="form-control col-6" required/>
+                        <input id="newLicensePrice" type="number" class="form-control col-12" required/>
                   </div>
                   <div class="col-12 mb-4">
                         <h4>Description:</h4>
-                        <input id="newLicenseDescription" type="text" class="form-control col-6" required/>
+                        <input id="newLicenseDescription" type="text" class="form-control col-12" required/>
                   </div>
               </div>
               @*<div class="col-6 mb-4">
