@@ -37,6 +37,7 @@ namespace ProdajaLicenci.Services
         {
             var dbLicenses = await _db.Licenses.Where(license => !_db.LicensePurchases.Select(p => p.License.Id).Contains(license.Id) && license.ValidTo > DateTime.Now).Include(l => l.Vendor).ToListAsync();
             var licenses = _mapper.Map<List<LicenseDto>>(dbLicenses);
+            licenses.ForEach(license => license.Key = "");
 
             return licenses;
         }
@@ -73,6 +74,12 @@ namespace ProdajaLicenci.Services
             findUser.Balance -= license.Price;
 
             await _db.SaveChangesAsync();
+        }
+        public async Task<List<LicenseDto>> GetUserLicenses(string userId)
+        {
+            var licenses = await _db.LicensePurchases.Where(lp => lp.Buyer.Id == userId).Select(lp => lp.License).ToListAsync();
+            
+            return _mapper.Map<List<LicenseDto>>(licenses);
         }
     }
 }

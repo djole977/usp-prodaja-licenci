@@ -37,9 +37,12 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item mr-4">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><h3>My Balance: $@user?.Balance</h3></a>
-                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><h3 style="color: #36a847">My Balance: $@user?.Balance</h3></a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" id="fullscreen" href="#" role="button">
                         <i id="fullscreen1" class="fas fa-expand-arrows-alt"></i>
@@ -49,10 +52,7 @@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        @{
-            if (User.Identity.IsAuthenticated)
-            {
-                <aside class="main-sidebar sidebar-dark-primary">
+        <aside class="main-sidebar sidebar-dark-primary">
             <!-- Brand Logo -->
             <a href="../Home/Dashboard" class="brand-link">
                 <img src="~/resources/singi_logo.png" class="brand-image img-rect" style="opacity: .8">
@@ -64,106 +64,88 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <h3 style="color: grey">Prodaja Licenci</h3>
+                        <h3 style="color: #d4d4d4">License Sales</h3>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block">@UserManager.GetUserName(User)</a>
-                    </div>
+                    
                 </div>
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul id="nav-sidebar" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a id="nav-link-14" asp-controller="Admin" asp-action="ManageAccounts" class="nav-link" onclick="addActive(this)">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Manage Users
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="nav-link-14" asp-controller="SalesAndMarketing" asp-action="Index" class="nav-link" onclick="addActive(this)">
-                                <i class="nav-icon fas fa-key"></i>
-                                <p>
-                                    Manage Licenses
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    Statistics
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item" >
-                                    <a id="nav-link-7" asp-controller="Home" asp-action="Statistics" class="nav-link" onclick="addActive(this)">
-                                        <i class="far fa-circle nav-icon"></i>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a id="nav-link-14" href="/Identity/Account/Login" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Login
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="nav-link-14" href="/Identity/Account/Register" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon fas fa-address-card"></i>
+                                    <p>
+                                        Register
+                                    </p>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a id="nav-link-14" asp-controller="Admin" asp-action="ManageAccounts" class="nav-link" onclick="addActive(this)">
+                                        <i class="nav-icon fas fa-users"></i>
                                         <p>
-                                            Chart
-                                        </p>
-                                    </a>
-                                    <a id="nav-link-10" asp-controller="Home" asp-action="StatisticsTable" class="nav-link" onclick="addActive(this)">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Table
+                                            Manage Users
                                         </p>
                                     </a>
                                 </li>
-                            </ul>
-                            
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-comments"></i>
-                                <p>
-                                    Evaluations
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item" >
-                                    <a id="nav-link-12" asp-controller="Admin" asp-action="EvaluationScoreSetup" class="nav-link" onclick="addActive(this)">
-                                        <i class=" nav-icon fa-solid fa-list-check"></i>
+                            }
+                            if(User.IsInRole("Admin") || User.IsInRole("HR") || User.IsInRole("Marketing"))
+                            {
+                                <li class="nav-item">
+                                    <a id="nav-link-14" asp-controller="SalesAndMarketing" asp-action="Index" class="nav-link" onclick="addActive(this)">
+                                        <i class="nav-icon fas fa-key"></i>
                                         <p>
-                                            Evaluation Score Setup
-                                        </p>
-                                    </a>
-                                    <a id="nav-link-13" asp-controller="Admin" asp-action="EvaluationScores" class="nav-link" onclick="addActive(this)">
-                                        <i class="nav-icon fa-sharp fa-solid fa-user-check"></i>
-                                        <p>
-                                            Evaluation Scores
+                                            Manage Licenses
                                         </p>
                                     </a>
                                 </li>
-                            </ul>
-                            
-                        </li>
-
-                        <li class="nav-item"><hr style="background-color: grey" /></li>
-                        <li class="nav-item">
-                            <a id="nav-link-9" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="nav-link" onclick="addActive(this)">
-                                <i class="nav-icon far fa-circle text-danger"></i>
-                                <p>Log Out</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled"><p>Role: Admin</p></a>
-                        </li>
+                            }
+                            <li class="nav-item">
+                                <a id="nav-link-14" asp-controller="Home" asp-action="Licenses" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon fas fa-store"></i>
+                                    <p>
+                                        Store
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="nav-link-14" asp-controller="Home" asp-action="MyLicenses" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon fas fa-key"></i>
+                                    <p>
+                                        My Licenses
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item"><hr style="background-color: grey" /></li>
+                            <li class="nav-item">
+                                <a id="nav-link-9" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="nav-link" onclick="addActive(this)">
+                                    <i class="nav-icon far fa-circle text-danger"></i>
+                                    <p>Log Out</p>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
-            }
-        }
-        
         </div>
 
         <!-- Content Wrapper. Contains page content -->

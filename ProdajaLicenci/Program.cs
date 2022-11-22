@@ -21,6 +21,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILicenseService, LicenseService>();
 builder.Services.AddScoped<IVendorService, VendorService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ISeedService, SeedService>();
 
 var app = builder.Build();
 
@@ -46,16 +47,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Licenses}/{id?}");
 app.MapRazorPages();
 
 app.Run();
-
-//Seed of data
-using(var scope = app.Services.CreateScope())
-{
-    var _dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    var _userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    var _roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    DataSeed.Initialize(_dbContext, _userManager, _roleManager).Wait();
-}
