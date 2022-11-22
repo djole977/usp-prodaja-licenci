@@ -5,7 +5,7 @@ namespace ProdajaLicenci.Interfaces
     public interface ILicenseService
     {
         public Task<List<LicenseDto>> GetAllLicenses();
-        public Task AddLicense(LicenseDto license);
+        public Task AddLicense(LicenseDto license, string addedById);
         public Task<List<LicenseCategoryDto>> GetAllCategories();
         public Task<List<LicensePurchaseDto>> GetAllLicensePurchases();
         public Task<List<LicenseDto>> GetNotPurchasedLicenses();
