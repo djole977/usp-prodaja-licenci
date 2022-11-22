@@ -50,9 +50,11 @@ namespace ProdajaLicenci.Services
         {
             return await _db.LicenseCategories.Select(category => _mapper.Map<LicenseCategoryDto>(category)).ToListAsync();
         }
-        public async Task AddLicense(LicenseDto license)
+        public async Task AddLicense(LicenseDto license, string addedById)
         {
             license.CreatedAt = DateTime.Now;
+            var addedBy = await _userManager.Users.Where(user => user.Id == addedById).FirstOrDefaultAsync();
+            license.AddedBy = _mapper.Map<ApplicationUserDto>(addedBy);
             var a = _mapper.Map<License>(license);
             _db.Licenses.Add(_mapper.Map<License>(license));
             await _db.SaveChangesAsync();

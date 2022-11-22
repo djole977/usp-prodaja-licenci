@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using ProdajaLicenci.Dtos;
 using ProdajaLicenci.Interfaces;
+using ProdajaLicenci.Models;
 using ProdajaLicenci.ViewModels;
 
 namespace ProdajaLicenci.Controllers
@@ -9,10 +11,12 @@ namespace ProdajaLicenci.Controllers
     {
         private readonly IVendorService _vendorService;
         private readonly ILicenseService _licenseService;
-        public SalesAndMarketingController(IVendorService vendorService, ILicenseService licenseService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public SalesAndMarketingController(IVendorService vendorService, ILicenseService licenseService, UserManager<ApplicationUser> userManager)
         {
             _vendorService = vendorService;
             _licenseService = licenseService;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +39,8 @@ namespace ProdajaLicenci.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewLicense(LicenseDto license)
         {
-            await _licenseService.AddLicense(license);
+            var user = await _userManager.GetUserAsync(User);
+            await _licenseService.AddLicense(license, user.Id);
 
             return Json(new { success = true });
         }
