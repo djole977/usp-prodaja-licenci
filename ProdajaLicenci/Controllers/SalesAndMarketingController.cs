@@ -21,7 +21,11 @@ namespace ProdajaLicenci.Controllers
             var purchases = await _licenseService.GetAllLicensePurchases();
             foreach(var purchase in purchases)
             {
-                model.Licenses.Where(license => license.Id == purchase.LicenseId).Select(license => license.BoughtBy.Email = purchase.Buyer.Email);
+                var license = model.Licenses.Where(license => license.Id == purchase.LicenseId).FirstOrDefault();
+                if(license != null)
+                {
+                    license.BoughtBy = purchase.Buyer;
+                }
             }
             model.LicenseCategories = await _licenseService.GetAllCategories();
             model.Vendors = await _vendorService.GetAllVendors();

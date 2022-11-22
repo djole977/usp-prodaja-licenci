@@ -46,26 +46,30 @@
                         <td>
                             $@license.Price.ToString()
                         </td>
-                        <td>
+                        <td class="d-flex flex-row">
                             @{
                                 if (!User.Identity.IsAuthenticated)
                                 {
-                                    <button class="btn btn-primary">Log in to purchase</button>
+                                        <button class="btn btn-primary">Log in to purchase</button>
                                 }
                                 else
                                 {
                                     if(license.Price > user.Balance)
                                     {
-                                        <div class="col-6" data-bs-toggle="tooltip" data-bs-placement="top" title="Insufficient funds">
-                                            <button class="btn btn-success col-12" disabled >Purchase</button>
-                                        </div>
+                                            <div class="col-6" data-bs-toggle="tooltip" data-bs-placement="top" title="Insufficient funds">
+                                                <button class="btn btn-success col-12" disabled >Purchase</button>
+                                            </div>
 
                                     }
                                     else
                                     {
-                                        <button class="btn btn-success col-6" onclick="PurchaseLicense(@license.Id)">Purchase</button>
+                                            <button class="btn btn-success col-6" onclick="PurchaseLicense(@license.Id)">Purchase</button>
                                     }
                                 }
+                                <div>
+                                    <i class="fas fa-circle-info ml-4" style="cursor: pointer; font-size: 30px" onclick="ShowInfo('@license.Description')"></i>
+                                </div>
+                                    
                             }
                             
                         </td>
@@ -74,6 +78,28 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div id="showInfoModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">License Information</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="col-12 d-flex justify-content-start">
+              <h4>About:</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-start">
+              <p id="aboutParagraph"></p>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <input id="purchaseLicenseUrl" type="hidden" value="@Url.Action("PurchaseLicense", "Home")" />

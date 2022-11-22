@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-    $('#licensesTable').DataTable()
+    $('#licensesTable').DataTable({
+        responsive: true
+    })
 })
 
 function PurchaseLicense(id) {
@@ -32,4 +34,8 @@ function PurchaseLicense(id) {
             }
         }
     })
+}
+function ShowInfo(description) {
+    $('#aboutParagraph').html(description)
+    $('#showInfoModal').modal('show')
 }
