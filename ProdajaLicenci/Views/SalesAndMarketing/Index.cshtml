@@ -29,7 +29,7 @@
         <tbody>
             @foreach(var license in Model.Licenses)
             {
-                <tr>
+                <tr @(license.BoughtBy != null ? "style=background-color:#cefad0" : "")>
                     <td>
                         @license.Key
                     </td>

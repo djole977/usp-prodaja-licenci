@@ -13,10 +13,11 @@ namespace ProdajaLicenci.Services
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
-        public LicenseService(ApplicationDbContext db, IMapper mapper)
+        public LicenseService(ApplicationDbContext db, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<List<LicenseDto>> GetAllLicenses()
@@ -35,7 +36,7 @@ namespace ProdajaLicenci.Services
         }
         public async Task<List<LicenseDto>> GetNotPurchasedLicenses()
         {
-            var dbLicenses = await _db.Licenses.Where(license => !_db.LicensePurchases.Select(p => p.License.Id).Contains(license.Id) && license.ValidTo > DateTime.Now).Include(l => l.Vendor).ToListAsync();
+            var dbLicenses = await _db.Licenses.Where(license => !_db.LicensePurchases.Select(p => p.License.Id).Contains(license.Id) && license.ValidTo > DateTime.Now).Include(l => l.Vendor).Include(license => license.LicenseCategory).ToListAsync();
             var licenses = _mapper.Map<List<LicenseDto>>(dbLicenses);
             licenses.ForEach(license => license.Key = "");
 
@@ -43,7 +44,7 @@ namespace ProdajaLicenci.Services
         }
         public async Task<List<LicensePurchaseDto>> GetAllLicensePurchases()
         {
-            var licensePurchases = await _db.LicensePurchases.Include(license => license.License).Include(license => license.Buyer).ToListAsync();
+            var licensePurchases = await _db.LicensePurchases.Include(license => license.Buyer).Include(license => license.License).ThenInclude(license => license.LicenseCategory).ToListAsync();
             return _mapper.Map<List<LicensePurchaseDto>>(licensePurchases);
         }
         public async Task<List<LicenseCategoryDto>> GetAllCategories()
