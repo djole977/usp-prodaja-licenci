@@ -50,3 +50,12 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+//Seed of data
+using(var scope = app.Services.CreateScope())
+{
+    var _dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var _userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var _roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    DataSeed.Initialize(_dbContext, _userManager, _roleManager).Wait();
+}
