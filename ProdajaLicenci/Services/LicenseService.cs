@@ -71,7 +71,8 @@ namespace ProdajaLicenci.Services
             LicensePurchase newPurchase = new LicensePurchase
             {
                 LicenseId = licenseId,
-                Buyer = findUser
+                Buyer = findUser,
+                CreatedAt = DateTime.Now
             };
             _db.LicensePurchases.Add(newPurchase);
             findUser.Balance -= license.Price;

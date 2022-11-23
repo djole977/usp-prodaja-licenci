@@ -13,11 +13,13 @@ namespace ProdajaLicenci.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
-        public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IUserService userService)
+        private readonly ILicenseService _licenseService;
+        public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IUserService userService, ILicenseService licenseService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _userService = userService;
+            _licenseService = licenseService;
         }
 
         public IActionResult Index()
@@ -51,6 +53,20 @@ namespace ProdajaLicenci.Controllers
             await _userManager.AddToRoleAsync(userr, user.Role);
 
             return Json(new { success = true });
+        }
+        public async Task<IActionResult> ChartProfits()
+        {
+            return View();
+        }
+        public async Task<IActionResult> GetChartData(int year)
+        {
+            var licensePurchases = await _licenseService.GetAllLicensePurchases();
+            float[] chartData = new float[12];
+            for(int i = 0; i < 12; i++)
+            {
+                chartData[i] = licensePurchases.Where(lp => lp.CreatedAt.Month == i + 1).Sum(lp => lp.License.Price);
+            }
+            return Json(chartData);
         }
     }
 }

@@ -115,6 +115,31 @@
                                         </p>
                                     </a>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-dollar-sign"></i>
+                                        <p>
+                                            Profits
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item" >
+                                            <a id="nav-link-3" asp-controller="Admin" asp-action="ChartProfits" class="nav-link" onclick="addActive(this)">
+                                                <i class="nav-icon fas fa-chart-line"></i>
+                                                <p>
+                                                    Timeline
+                                                </p>
+                                            </a>
+                                            <a id="nav-link-4" asp-controller="Admin" asp-action="Users" class="nav-link" onclick="addActive(this)">
+                                                <i class="nav-icon fas fa-building"></i>
+                                                <p>
+                                                    Per Vendor
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             }
                             if(User.IsInRole("Admin") || User.IsInRole("HR") || User.IsInRole("Marketing"))
                             {
@@ -183,6 +208,7 @@
     <script src="~/lib/sidebar/dist/js/adminlte.min.js"></script>
     <script src="~/lib/moment/moment.min.js"></script>
     <script src="https://kit.fontawesome.com/9c82e85201.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

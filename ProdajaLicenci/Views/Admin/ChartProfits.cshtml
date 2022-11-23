@@ -1,0 +1,15 @@
+﻿<div class="col-12">
+    <div class="col-12">
+        <h3>Period of profits</h3>
+    </div>
+    <hr />
+    <div class="col-12">
+        <canvas id="profitChart" style="max-height: 700px"></canvas>
+    </div>
+</div>
+
+<input type="hidden" id="getChartDataUrl" value="@Url.Action("GetChartData", "Admin")" />
+
+@section Scripts{
+    <script src="~/js/ChartProfits.js" asp-append-version="true"></script>
+}
