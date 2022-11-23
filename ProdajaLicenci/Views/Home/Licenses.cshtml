@@ -56,7 +56,9 @@
                             @{
                                 if (!User.Identity.IsAuthenticated)
                                 {
+                                    <a href="/Identity/Account/Login">
                                         <button class="btn btn-primary">Log in to purchase</button>
+                                    </a>
                                 }
                                 else
                                 {

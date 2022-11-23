@@ -7,15 +7,15 @@ $(document).ready(function () {
 function CreateChart(year) {
     $.ajax({
         type: 'POST',
-        url: $('#getChartDataUrl').val(),
+        url: $('#getVendorChartDataUrl').val(),
         data: { year: year },
         success: function (returnData) {
             chartCtx = new Chart($('#profitChart'), {
                 type: 'bar',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: returnData.vendors,
                     datasets: [{
-                        data: returnData,
+                        data: returnData.vendorProfits,
                         backgroundColor: '#bd8aff'
                     }]
                 },

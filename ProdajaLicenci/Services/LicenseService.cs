@@ -44,7 +44,7 @@ namespace ProdajaLicenci.Services
         }
         public async Task<List<LicensePurchaseDto>> GetAllLicensePurchases()
         {
-            var licensePurchases = await _db.LicensePurchases.Include(license => license.Buyer).Include(license => license.License).ThenInclude(license => license.LicenseCategory).ToListAsync();
+            var licensePurchases = await _db.LicensePurchases.Include(license => license.Buyer).Include(license => license.License).ThenInclude(license => license.LicenseCategory).Include(lp => lp.License).ThenInclude(license => license.Vendor).ToListAsync();
             return _mapper.Map<List<LicensePurchaseDto>>(licensePurchases);
         }
         public async Task<List<LicenseCategoryDto>> GetAllCategories()
